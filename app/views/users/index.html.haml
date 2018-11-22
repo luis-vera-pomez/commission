@@ -2,24 +2,6 @@
 
 %h1 Users
 
-%table.table.table-striped.table-hover
-  %thead
-    %tr
-      %th First name
-      %th Last name
-      %th Email
-      %th Archived
-      %th{colspan: "3"}
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.first_name
-        %td= user.last_name
-        %td= user.email
-        %td= user.archived
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-%br
+= render_datatable @datatable
 
 = link_to 'New User', new_user_path

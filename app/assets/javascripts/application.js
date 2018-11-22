@@ -16,4 +16,6 @@
 //= require_tree .
 //= require jquery3
 //= require popper
-//= require bootstrap-sprockets
+//= require bootstrap
+//= require effective_bootstrap
+//= require effective_datatables

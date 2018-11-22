@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    authorize! :index, User
+    
+    @datatable = UsersDatatable.new(self)
   end
 
   # GET /users/1

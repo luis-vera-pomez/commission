@@ -35,8 +35,13 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap', '~> 4.1.3'
 gem 'haml'
+gem 'haml-rails'
 gem 'simple_form'
 gem 'jquery-rails'
+gem 'effective_bootstrap'
+gem 'effective_datatables'
+gem 'devise'
+gem 'cancancan', '~> 2.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
