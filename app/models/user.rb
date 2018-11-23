@@ -10,8 +10,7 @@ class User < ApplicationRecord
   #   email                   :string
   #   archived                :boolean
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true
+  validates :first_name, presence: true, if: -> { persisted? }
+  validates :last_name, presence: true, if: -> { persisted? }
 
 end
