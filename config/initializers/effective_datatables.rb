@@ -26,7 +26,7 @@ EffectiveDatatables.setup do |config|
   config.default_length = 25
 
   # Default class used on the <table> tag
-  config.html_class = 'table table-hover'
+  config.html_class = 'table table-hover table-striped'
 
   # Log search/sort information to the console
   config.debug = true

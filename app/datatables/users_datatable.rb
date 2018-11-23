@@ -6,7 +6,9 @@ class UsersDatatable < Effective::Datatable
     col :first_name
     col :last_name
     col :email
-    col :archived
+    col :archived, visible: false
+
+    actions_col partial: 'admin/users/actions', partial_as: :user
   end
 
   collection do

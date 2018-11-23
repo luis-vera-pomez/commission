@@ -1,22 +1,23 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{href: "#"} Commission
-  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
-    %span.navbar-toggler-icon
-  #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-      %li.nav-item.active
-        %a.nav-link{href: "#{users_path}"}
-          Users
-          %span.sr-only (current)
-      %li.nav-item
-        %a.nav-link{href: "#"} Link
-      %li.nav-item.dropdown
-        %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
-          Dropdown
-        .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-          %a.dropdown-item{href: "#"} Action
-          %a.dropdown-item{href: "#"} Another action
-          .dropdown-divider
-          %a.dropdown-item{href: "#"} Something else here
-      %li.nav-item
-        %a.nav-link.disabled{href: "#"} Disabled
+  %a.navbar-brand{href: "#{dashboard_index_path}"} Commission
+  - if current_user
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item.active
+          %a.nav-link{href: "#"}
+            Sales
+            %span.sr-only (current)
+        %li.nav-item
+          %a.nav-link.disabled{href: "#"} Disabled
+      %ul.navbar-nav.navbar-right
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+            Admin
+          .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+            %a.dropdown-item{href: "#{admin_users_path}"} Users
+            .dropdown-divider
+            %a.dropdown-item.disabled{href: "#"} Something else here
+        %li.nav-item.active
+          %a.nav-link{href: "#{destroy_user_session_path}", 'data-method' => :delete} Sign Out

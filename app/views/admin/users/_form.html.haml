@@ -1,0 +1,21 @@
+= simple_form_for [:admin, @user] do |f|
+  .row
+    .col-sm-9
+      = f.error_notification
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .row
+    .col-sm-4
+      .form-inputs
+        = f.input :first_name
+        = f.input :last_name
+        = f.input :email
+        = f.input :password, required: f.object.new_record?, type: 'password'
+        = f.input :password_confirmation, type: 'password'
+        = f.input :archived
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+
+    .col-sm-4.offset-1
+      = f.input :roles, collection: EffectiveRoles.roles_collection(f.object), as: :check_boxes
