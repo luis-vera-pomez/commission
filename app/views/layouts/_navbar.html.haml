@@ -19,6 +19,6 @@
             .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
               %a.dropdown-item{href: "#{admin_users_path}"} Users
               .dropdown-divider
-              %a.dropdown-item.disabled{href: "#"} Something else here
+              %a.dropdown-item{href: "#{admin_products_path}"} Products
         %li.nav-item.active
           %a.nav-link{href: "#{destroy_user_session_path}", 'data-method' => :delete} Sign Out

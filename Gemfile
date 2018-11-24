@@ -43,6 +43,7 @@ gem 'effective_datatables'
 gem 'effective_roles'
 gem 'devise'
 gem 'cancancan', '~> 2.0'
+gem 'httparty'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

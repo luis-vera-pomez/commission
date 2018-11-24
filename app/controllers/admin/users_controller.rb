@@ -1,5 +1,4 @@
-class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!   # This is devise, ensure we're logged in.
+class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
