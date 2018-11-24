@@ -9,5 +9,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render partial: 'layouts/navbar'
+    - if current_user.present?
+      .text-right
+        = exclusive_use_message(current_user)
     .container-fluid
       = yield

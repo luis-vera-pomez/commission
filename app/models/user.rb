@@ -16,4 +16,9 @@ class User < ApplicationRecord
   validates :first_name, presence: true, if: -> { persisted? }
   validates :last_name, presence: true, if: -> { persisted? }
 
+  def full_name
+    return email if first_name.blank? || last_name.blank?
+    "#{first_name} #{last_name}"
+  end
+
 end

@@ -2,6 +2,9 @@
 
 %h1 Users
 
-= render_datatable @datatable
+.row
+  .col-sm-12.text-right.action-buttons
+    = link_to new_admin_user_path, class: 'btn btn-primary' do
+      New User
 
-= link_to 'New User', new_admin_user_path
+= render_datatable @datatable

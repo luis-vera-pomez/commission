@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   %a.navbar-brand{href: "#{dashboard_index_path}"} Commission
   - if current_user
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
@@ -12,12 +12,13 @@
         %li.nav-item
           %a.nav-link.disabled{href: "#"} Disabled
       %ul.navbar-nav.navbar-right
-        %li.nav-item.dropdown
-          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
-            Admin
-          .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-            %a.dropdown-item{href: "#{admin_users_path}"} Users
-            .dropdown-divider
-            %a.dropdown-item.disabled{href: "#"} Something else here
+        - if can?(:manage, :all)
+          %li.nav-item.dropdown.active
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+              Admin
+            .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+              %a.dropdown-item{href: "#{admin_users_path}"} Users
+              .dropdown-divider
+              %a.dropdown-item.disabled{href: "#"} Something else here
         %li.nav-item.active
           %a.nav-link{href: "#{destroy_user_session_path}", 'data-method' => :delete} Sign Out
