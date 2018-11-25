@@ -4,36 +4,38 @@ class UserInterface
   include HTTParty
   base_uri "https://randomuser.me/"
 
-  def initialize(quantity:, gender:)
+  def initialize(team:, quantity:, gender:)
+    @team = team
     @quantity = quantity
     @gender = gender
   end
 
   def get_users
-    self.class.get("/api/?results=#{@quantity}&gender=#{@gender}")
+  	conditions = "results=#{@quantity}" # Quantity of users
+  	conditions += "&gender=#{@gender.strip.downcase}" # Gender of users
+  	conditions += "&password=upper,lower,6-8" # Password conditions
+  	conditions += "&nat=ca,us" # Nationality of users
+
+    self.class.get("/api/?#{conditions}")
   end
 
   def generate_users
-    new_users = get_users['results']
+    users = get_users['results']
 
-    new_users.each do |user|
-      User.create!(
-        first_name: user['name']['first'],
-        last_name: user['name']['last'],
-        gender: user['gender'],
+    users.each do |user|
+      new_user = User.create!(
+        first_name: user['name']['first'].capitalize,
+        last_name: user['name']['last'].capitalize,
+        email: user['email'],
+        gender: ( user['gender'] == 'male' ? User::MALE : User::FEMALE ),
         phone: user['phone'],
-        cell: user['cell']
+        cell: user['cell'],
+        password: '123456', # user['login']['password'], # Assign all new users the same password for testing purposes
+        roles: [:agent]
       )
+
+      Agent.create!(team_id: @team.id, user_id: new_user.id, associated_at: Time.zone.now)
     end
   end
 
 end
-
-# user_interface = UserInterface.new(quantity: 1, gender: 'female')
-# user_interface.generate_users
-
-# user_interface.users.each do |user|
-#   binding.pry
-# end
-
-# user['results'].first['name']['last'].capitalize

@@ -6,6 +6,10 @@ class UsersDatatable < Effective::Datatable
     col :first_name
     col :last_name
     col :email
+    col :gender
+    col :phone
+    col :cell
+    col :roles
     col :current_sign_in_at
     col :last_sign_in_at
     col :archived, visible: false

@@ -1,0 +1,10 @@
+%p#notice= notice
+
+%h1 Teams
+
+.row
+  .col-sm-12.text-right.action-buttons
+    = link_to new_admin_team_path, class: 'btn btn-primary' do
+      New Team
+
+= render_datatable @datatable

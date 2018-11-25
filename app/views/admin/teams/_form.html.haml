@@ -1,0 +1,31 @@
+= simple_form_for [:admin, @team] do |f|
+  .row
+    .col-sm-9
+      = f.error_notification
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .row
+    .col-sm-4
+      .form-inputs
+        = f.input :title
+        = f.input :description
+        = f.input :location, collection: Team::LOCATIONS
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+
+    .col-sm-4.offset-1
+      %h4 Actions:
+
+      = link_to generate_users_admin_team_path(quantity: 10, gender: User::MALE), class: 'btn btn-primary', method: :post do
+        Generate 10 male users
+      
+      %br
+      %br
+
+      = link_to generate_users_admin_team_path(quantity: 10, gender: User::FEMALE), class: 'btn btn-primary', method: :post do
+        Generate 10 female users
+
+  .row
+    .col-sm-9
+      %hr

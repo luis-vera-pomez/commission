@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_24_050926) do
+ActiveRecord::Schema.define(version: 2018_11_25_041716) do
+
+  create_table "agents", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "team_id"
+    t.integer "supervised_by_id"
+    t.datetime "associated_at"
+    t.datetime "departed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.integer "price", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_11_24_050926) do
     t.string "gender"
     t.string "phone"
     t.string "cell"
-    t.boolean "archived"
+    t.boolean "archived", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   acts_as_role_restricted
 
+  has_many :agents
+
   # structure do
   #   first_name              :string
   #   last_name               :string
@@ -15,8 +17,8 @@ class User < ApplicationRecord
   #   cell                    :string
   #   archived                :boolean
 
-  MALE = 'male'
-  FEMALE = 'female'
+  MALE = 'Male '
+  FEMALE = 'Female'
   GENDERS = [MALE, FEMALE]
 
   validates :encrypted_password, presence: true

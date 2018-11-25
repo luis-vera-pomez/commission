@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :gender
       t.string :phone
       t.string :cell
-      t.boolean :archived
+      t.boolean :archived, default: false
 
       t.timestamps
     end

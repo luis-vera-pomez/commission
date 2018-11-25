@@ -17,5 +17,6 @@ module Commission
     # the framework and any gems in your application.
 
     config.time_zone = 'Mountain Time (US & Canada)'
+    config.eager_load_paths << "#{Rails.root}/lib"
   end
 end

@@ -1,0 +1,12 @@
+%h1 Editing Team
+= render 'form', user: @team
+
+%h2 Agents list
+
+= render_datatable @agents
+
+%hr
+
+= link_to 'Show', admin_team_path(@team)
+|
+= link_to 'Back', admin_teams_path
