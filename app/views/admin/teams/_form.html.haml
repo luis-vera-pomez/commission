@@ -20,6 +20,12 @@
       = link_to generate_supervisors_admin_team_path(quantity: 5, role: :supervisor, gender: nil), class: 'btn btn-primary', method: :post do
         Generate 5 supervisors
 
+      %br
+      %br
+
+      = link_to simulate_sales_admin_team_path(quantity: 10), class: 'btn btn-primary', method: :post do
+        Simulate sales for 10 agents
+
   .row
     .col-sm-9
       %hr

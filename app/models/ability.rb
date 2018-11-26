@@ -6,7 +6,8 @@ class Ability
     
     # Shared abilities of all signed in users
     if user.persisted?
-      can [:index], 'Dashboard'
+      can :index, 'Dashboard'
+      can :index, Team
     end
 
     if user.is? :admin

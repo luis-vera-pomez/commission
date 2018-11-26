@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       
       member do
         post :generate_supervisors
+        post :simulate_sales
       end
     end
   end

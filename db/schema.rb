@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_041716) do
+ActiveRecord::Schema.define(version: 2018_11_26_045853) do
 
   create_table "agents", force: :cascade do |t|
     t.integer "user_id"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 2018_11_25_041716) do
     t.integer "price", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "product_id"
+    t.integer "quantity"
+    t.integer "total"
+    t.datetime "saled_at"
   end
 
   create_table "teams", force: :cascade do |t|

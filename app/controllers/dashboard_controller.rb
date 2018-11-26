@@ -4,6 +4,8 @@ class DashboardController < ApplicationController
 
   def index
     @page_title = 'Dashboard'
+
+    @datatable = UserTeamsDatatable.new(self, user_id: current_user.id)
   end
 
   private

@@ -1,5 +1,5 @@
 class Admin::TeamsController < Admin::BaseController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :generate_supervisors]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :generate_supervisors, :simulate_sales]
 
   def index
     authorize! :index, Team
@@ -9,6 +9,7 @@ class Admin::TeamsController < Admin::BaseController
 
   def show
     @agents = AgentsDatatable.new(self, team_id: @team.id)
+    @sales = SalesDatatable.new(self, team_id: @team.id)
   end
 
   def new
@@ -17,6 +18,7 @@ class Admin::TeamsController < Admin::BaseController
 
   def edit
     @agents = AgentsDatatable.new(self, team_id: @team.id)
+    @sales = SalesDatatable.new(self, team_id: @team.id)
   end
 
   def create
@@ -63,12 +65,36 @@ class Admin::TeamsController < Admin::BaseController
     render :edit, notice: message
   end
 
+  def simulate_sales
+    quantity = params[:quantity]
+
+    Team.transaction do
+      begin
+        @team.agents.seller.limit(quantity).each do |agent|
+          number = rand(4)
+          array = (1..number).map { |n| rand(1..4) }.uniq
+
+          Product.where(id: array).each do |product|
+            product_quantity = rand(1..10)
+            total = product_quantity * product.price
+            saled_at = Time.zone.now - (rand(150)).days
+
+            Sale.create!(product: product, agent: agent, quantity: product_quantity, total: total, saled_at: saled_at)
+          end
+        end
+      rescue => e
+        message = "Error simulating sales. Details: #{e.message}"
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
   private
     def set_team
       @team = Team.find(params[:id])
     end
 
     def team_params
-      params.require(:team).permit(:first_name, :last_name, :email, :archived, :password, :password_confirmation, roles: [])
+      params.require(:team).permit(:title, :description, :location)
     end
 end

@@ -12,6 +12,12 @@
 
 %hr
 
+%h2 Sales list
+
+= render_datatable @sales
+
+%hr
+
 = link_to 'Show', admin_team_path(@team)
 |
 = link_to 'Back', admin_teams_path
