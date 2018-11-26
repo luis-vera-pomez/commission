@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application to manage Sales information.
 
-Things you may want to cover:
+* Ruby version: 2.5.0
+* Rails version: 5.2.1
 
-* Ruby version
+# Installation
 
-* System dependencies
+Run the bundle command to install it:
 
-* Configuration
+```console
+bundle install
+```
 
-* Database creation
+Run migrations:
 
-* Database initialization
+```console
+rake db:migrate
+```
 
-* How to run the test suite
+Initialize data:
 
-* Services (job queues, cache servers, search engines, etc.)
+```console
+rails db:seed
+```
 
-* Deployment instructions
+Simulate sales information:
 
-* ...
+```console
+rake simulate_sales
+```
+
+# Login information
+
+* User: admin@company.com
+* Password: 123456
