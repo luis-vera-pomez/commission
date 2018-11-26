@@ -10,7 +10,7 @@
       .form-actions
         = f.button :submit, class: 'btn btn-primary'
 
-  - if @agent.persisted?
+  - if @agent.persisted? && current_user.is?(:supervisor)
     .col-sm-4.offset-1
       %h4 Actions:
 

@@ -3,4 +3,15 @@
 
 %hr
 
+- if @agent.user.is?(:supervisor)
+  %h2 Dependants List
+
+  = render_datatable @dependants
+- else @agent.user.is?(:agent)
+  %h2 Sales List
+
+  = render_datatable @sales
+
+%hr
+
 = link_to 'Back', edit_admin_team_path(@agent.team)

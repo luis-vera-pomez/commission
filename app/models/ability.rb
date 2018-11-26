@@ -8,6 +8,7 @@ class Ability
     if user.persisted?
       can :index, 'Dashboard'
       can :index, Team
+      can :index, Sale
     end
 
     if user.is? :admin

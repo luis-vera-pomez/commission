@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_045853) do
   create_table "sales", force: :cascade do |t|
     t.integer "agent_id"
     t.integer "product_id"
+    t.string "policy"
     t.integer "quantity"
     t.integer "total"
     t.datetime "saled_at"

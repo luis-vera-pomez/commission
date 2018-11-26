@@ -6,6 +6,10 @@ class TeamsDatatable < Effective::Datatable
     col :title
     col :description
     col :location
+
+    col(:supervisors) { |team| team.supervisors }
+    col(:sellers) { |team| team.sellers }
+
     col :created_at, visible: false
     col :updated_at, visible: false
 

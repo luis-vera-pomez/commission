@@ -58,6 +58,8 @@ class Admin::TeamsController < Admin::BaseController
         return redirect_to admin_team_path(@team), notice: "#{quantity} #{gender} supervisors where successfully included in the team."
       rescue => e
         message = "Error generating supervisors. Details: #{e.message}"
+        @agents = AgentsDatatable.new(self, team_id: @team.id)
+        @sales = SalesDatatable.new(self, team_id: @team.id)
         raise ActiveRecord::Rollback
       end
     end
@@ -82,8 +84,12 @@ class Admin::TeamsController < Admin::BaseController
             Sale.create!(product: product, agent: agent, quantity: product_quantity, total: total, saled_at: saled_at)
           end
         end
+
+        return redirect_to admin_team_path(@team), notice: "Sales for #{quantity} agents where successfully simulated."
       rescue => e
         message = "Error simulating sales. Details: #{e.message}"
+        @agents = AgentsDatatable.new(self, team_id: @team.id)
+        @sales = SalesDatatable.new(self, team_id: @team.id)
         raise ActiveRecord::Rollback
       end
     end

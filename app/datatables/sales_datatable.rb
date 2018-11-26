@@ -1,14 +1,14 @@
 class SalesDatatable < Effective::Datatable
 
   datatable do
-    order :id, :desc
+    order :saled_at, :desc
     
-    col :id
+    col :saled_at
+    col :policy
     col :product
     col :agent
     col :quantity
     col :total
-    col :saled_at
   end
 
   collection do

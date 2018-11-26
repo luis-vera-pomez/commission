@@ -4,6 +4,7 @@ class AgentsDatatable < Effective::Datatable
     order :full_name
     
     col :full_name
+    col :gender
     col :associated_at
     col :departed_at
     col :roles

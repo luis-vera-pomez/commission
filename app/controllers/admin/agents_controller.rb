@@ -17,6 +17,8 @@ class Admin::AgentsController < Admin::BaseController
   end
 
   def edit
+    @dependants = DependantAgentsDatatable.new(self, team_id: @agent.team.id, supervised_by_id: @agent.id)
+    @sales = AgentSalesDatatable.new(self, agent_id: @agent.id)
   end
 
   def create

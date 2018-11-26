@@ -12,7 +12,7 @@ Rails.application.routes.draw do
           post :generate_agents
         end
       end
-      
+
       member do
         post :generate_supervisors
         post :simulate_sales
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
+
+  resources :sales
 
   root 'dashboard#index'
 end

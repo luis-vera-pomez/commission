@@ -6,11 +6,9 @@
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
         %li.nav-item.active
-          %a.nav-link{href: "#"}
+          %a.nav-link{href: "#{sales_path}"}
             Sales
             %span.sr-only (current)
-        %li.nav-item
-          %a.nav-link.disabled{href: "#"} Disabled
       %ul.navbar-nav.navbar-right
         - if can?(:manage, :all)
           %li.nav-item.dropdown.active

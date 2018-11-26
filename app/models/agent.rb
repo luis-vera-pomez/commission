@@ -24,6 +24,10 @@ class Agent < ApplicationRecord
     user&.full_name
   end
 
+  def gender
+    user&.gender
+  end
+
   def roles
     return nil unless user&.roles
     roles = user.roles
