@@ -39,4 +39,8 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def is_team_member?(team:)
+    agents.any? { |agent| agent.team == team }
+  end
+
 end

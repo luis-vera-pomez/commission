@@ -1,6 +1,6 @@
 class Admin::AgentsController < Admin::BaseController
   before_action :set_agent, only: [:show, :edit, :update, :destroy, :generate_agents]
-  before_action :set_team, only: [:new]
+  before_action :set_team, only: [:new, :create]
 
   def index
     authorize! :index, Agent
@@ -9,6 +9,7 @@ class Admin::AgentsController < Admin::BaseController
   end
 
   def show
+    @dependants = DependantAgentsDatatable.new(self, team_id: @agent.team.id, supervised_by_id: @agent.id)
   end
 
   def new
@@ -19,10 +20,11 @@ class Admin::AgentsController < Admin::BaseController
   end
 
   def create
-    @agent = Agent.new(agent_params)
+    @agent = @team.agents.build
+    @agent.assign_attributes(agent_params)
 
     if @agent.save
-      redirect_to admin_agent_path(@agent), notice: 'Agent was successfully created.'
+      redirect_to admin_team_agent_path(@agent.team, @agent), notice: 'Agent was successfully created.'
     else
       render :new
     end
@@ -72,6 +74,6 @@ class Admin::AgentsController < Admin::BaseController
     end
 
     def agent_params
-      params.require(:agent).permit(:associated_at, :departed_at, :supervised_by_id)
+      params.require(:agent).permit(:user_id, :associated_at, :departed_at, :supervised_by_id)
     end
 end

@@ -22,6 +22,7 @@ class Agent < ApplicationRecord
   end
 
   def roles
+    return nil unless user&.roles
     roles = user.roles
 
     roles.length > 1 ? roles : roles.first

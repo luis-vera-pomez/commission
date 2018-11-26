@@ -1,22 +1,24 @@
 .row
   .col-sm-4
     = effective_form_with(model: [:admin, :team, @agent]) do |f|
+      = f.select :user_id, available_users(team: @team)
       = f.date_field :associated_at, input_js: { useCurrent: 'day', showTodayButton: true }
       = f.date_field :departed_at, input_js: { useCurrent: 'day', showTodayButton: true }
       = f.text_field :roles, disabled: true
-      = f.select :supervised_by_id, Agent.includes(:team, :user).active.select { |agent| agent.team == @agent.team && agent.user.is?(:supervisor) }, disabled: f.object.user.is?(:supervisor)
+      = f.select :supervised_by_id, Agent.includes(:team, :user).active.select { |agent| agent.team == @agent.team && agent.user&.is?(:supervisor) }, disabled: f.object.user&.is?(:supervisor)
 
       .form-actions
         = f.button :submit, class: 'btn btn-primary'
 
-  .col-sm-4.offset-1
-    %h4 Actions:
+  - if @agent.persisted?
+    .col-sm-4.offset-1
+      %h4 Actions:
 
-    = link_to generate_agents_admin_team_agent_path(quantity: 10, role: :agent, gender: User::MALE), class: 'btn btn-primary', method: :post do
-      Generate 10 male users
-      
-    %br
-    %br
+      = link_to generate_agents_admin_team_agent_path(quantity: 10, role: :agent, gender: User::MALE), class: 'btn btn-primary', method: :post do
+        Generate 10 male users
+        
+      %br
+      %br
 
-    = link_to generate_agents_admin_team_agent_path(quantity: 10, role: :agent, gender: User::FEMALE), class: 'btn btn-primary', method: :post do
-      Generate 10 female users
+      = link_to generate_agents_admin_team_agent_path(quantity: 10, role: :agent, gender: User::FEMALE), class: 'btn btn-primary', method: :post do
+        Generate 10 female users

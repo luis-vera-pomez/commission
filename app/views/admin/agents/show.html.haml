@@ -19,8 +19,17 @@
       %strong Departed_at:
       = @agent.departed_at&.strftime('%F')
     %p
-      %strong Supervised By:
-      = @agent.supervised_by
+      %strong Roles:
+      = @agent.roles
+    - if @agent.user.is?(:agent)
+      %p
+        %strong Supervised By:
+        = @agent.supervised_by
+
+- if @agent.user.is?(:supervisor)
+  %h2 Dependants list
+
+  = render_datatable @dependants
 
 %hr
 

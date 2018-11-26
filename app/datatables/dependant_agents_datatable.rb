@@ -1,4 +1,4 @@
-class AgentsDatatable < Effective::Datatable
+class DependantAgentsDatatable < Effective::Datatable
 
   datatable do
     order :full_name
@@ -7,7 +7,6 @@ class AgentsDatatable < Effective::Datatable
     col :associated_at
     col :departed_at
     col :roles
-    col :supervised_by
 
     actions_col partial: 'admin/agents/actions', partial_as: :agent
   end
@@ -15,7 +14,7 @@ class AgentsDatatable < Effective::Datatable
   collection do
     scope = Agent.includes(:team, :user, supervised_by: [:user]).active
 
-    attributes[:team_id].present? ? scope.where(team_id: attributes[:team_id] ) : scope
+    attributes[:team_id].present? && attributes[:supervised_by_id].present? ? scope.where(team_id: attributes[:team_id], supervised_by_id: attributes[:supervised_by_id]) : scope
   end
 
 end
