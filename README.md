@@ -35,3 +35,4 @@ rake simulate_sales
 
 * User: admin@company.com
 * Password: 123456
+* Any other user can login with the same password
