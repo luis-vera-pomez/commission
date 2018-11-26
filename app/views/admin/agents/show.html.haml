@@ -1,0 +1,29 @@
+%h1= "Agent: #{@agent}"
+
+.row
+  .col-sm-4
+    %p#notice= notice
+    %p
+      %strong First name:
+      = @agent.user.first_name
+    %p
+      %strong Last name:
+      = @agent.user.last_name
+    %p
+      %strong Email:
+      = @agent.user.email
+    %p
+      %strong Associated_at:
+      = @agent.associated_at.strftime('%F')
+    %p
+      %strong Departed_at:
+      = @agent.departed_at&.strftime('%F')
+    %p
+      %strong Supervised By:
+      = @agent.supervised_by
+
+%hr
+
+= link_to 'Edit', edit_admin_team_agent_path(@agent.team, @agent)
+|
+= link_to 'Back', admin_team_path(@agent.team)

@@ -28,6 +28,12 @@ class User < ApplicationRecord
   validates :phone, presence: true
   validates :cell, presence: true
 
+  scope :active, -> { where(archived: false) }
+
+  def to_s
+    full_name
+  end
+
   def full_name
     return email if first_name.blank? || last_name.blank?
     "#{first_name} #{last_name}"

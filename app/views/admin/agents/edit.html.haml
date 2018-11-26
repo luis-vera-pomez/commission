@@ -1,0 +1,6 @@
+%h1= "Edit Agent: #{@agent}"
+= render 'form', agent: @agent
+
+%hr
+
+= link_to 'Back', admin_team_path(@agent.team)

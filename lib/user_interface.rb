@@ -4,15 +4,17 @@ class UserInterface
   include HTTParty
   base_uri "https://randomuser.me/"
 
-  def initialize(team:, quantity:, gender:)
+  def initialize(team:, quantity:, role:, gender: nil, supervised_by: nil)
     @team = team
     @quantity = quantity
+    @role = role
     @gender = gender
+    @supervised_by = supervised_by
   end
 
   def get_users
   	conditions = "results=#{@quantity}" # Quantity of users
-  	conditions += "&gender=#{@gender.strip.downcase}" # Gender of users
+  	conditions += "&gender=#{@gender.strip.downcase}" if @gender.present? # Gender of users
   	conditions += "&password=upper,lower,6-8" # Password conditions
   	conditions += "&nat=ca,us" # Nationality of users
 
@@ -31,10 +33,10 @@ class UserInterface
         phone: user['phone'],
         cell: user['cell'],
         password: '123456', # user['login']['password'], # Assign all new users the same password for testing purposes
-        roles: [:agent]
+        roles: [@role]
       )
 
-      Agent.create!(team_id: @team.id, user_id: new_user.id, associated_at: Time.zone.now)
+      Agent.create!(team_id: @team.id, user_id: new_user.id, supervised_by: @supervised_by, associated_at: Time.zone.now)
     end
   end
 

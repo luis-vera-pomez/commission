@@ -11,4 +11,20 @@ class Agent < ApplicationRecord
 
   validates :associated_at, presence: true
 
+  scope :active, -> { where.not(associated_at: nil).where(departed_at: nil) }
+
+  def to_s
+    full_name
+  end
+
+  def full_name
+    user&.full_name
+  end
+
+  def roles
+    roles = user.roles
+
+    roles.length > 1 ? roles : roles.first
+  end
+
 end

@@ -1,5 +1,5 @@
 class Admin::TeamsController < Admin::BaseController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :generate_users]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :generate_supervisors]
 
   def index
     authorize! :index, Team
@@ -30,8 +30,6 @@ class Admin::TeamsController < Admin::BaseController
   end
 
   def update
-    check_password_params
-
     if @team.update(team_params)
       redirect_to admin_team_path(@team), notice: 'team was successfully updated.'
     else
@@ -44,19 +42,20 @@ class Admin::TeamsController < Admin::BaseController
     redirect_to teams_url, notice: 'team was successfully destroyed.'
   end
 
-  def generate_users
+  def generate_supervisors
     quantity = params[:quantity]
     gender = params[:gender]
+    role = params[:role].to_sym
     message = ''
 
     Team.transaction do
       begin
-        user_interface = UserInterface.new(team: @team, quantity: quantity, gender: gender)
+        user_interface = UserInterface.new(team: @team, quantity: quantity, role: role, gender: gender)
         user_interface.generate_users
 
-        return redirect_to admin_team_path(@team), notice: "#{quantity} #{gender} agents where successfully included in the team."
+        return redirect_to admin_team_path(@team), notice: "#{quantity} #{gender} supervisors where successfully included in the team."
       rescue => e
-        message = "Error generating agents. Details: #{e.message}"
+        message = "Error generating supervisors. Details: #{e.message}"
         raise ActiveRecord::Rollback
       end
     end

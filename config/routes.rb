@@ -7,8 +7,14 @@ Rails.application.routes.draw do
     resources :products
     
     resources :teams do
+      resources :agents do
+        member do
+          post :generate_agents
+        end
+      end
+      
       member do
-        post :generate_users
+        post :generate_supervisors
       end
     end
   end

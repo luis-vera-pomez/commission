@@ -3,6 +3,11 @@
 
 %h2 Agents list
 
+.row
+  .col-sm-12.text-right.action-buttons
+    = link_to new_admin_team_agent_path(@team), class: 'btn btn-primary' do
+      New Agent
+
 = render_datatable @agents
 
 %hr
