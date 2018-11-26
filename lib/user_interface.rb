@@ -25,6 +25,8 @@ class UserInterface
     users = get_users['results']
 
     users.each do |user|
+      next if User.find_by_email(user['email'])
+
       new_user = User.create!(
         first_name: user['name']['first'].capitalize,
         last_name: user['name']['last'].capitalize,

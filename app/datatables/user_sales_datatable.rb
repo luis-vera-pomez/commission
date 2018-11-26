@@ -7,6 +7,7 @@ class UserSalesDatatable < Effective::Datatable
     col :policy
 
     col(:team) { |sale| sale.agent.team.title }
+    col(:location) { |sale| sale.agent.team.location }
 
     col :product
     col :quantity

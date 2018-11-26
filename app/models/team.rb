@@ -18,6 +18,10 @@ class Team < ApplicationRecord
   validates :title, presence: true
   validates :location, presence: true
 
+  def to_s
+    "#{title} - #{location}"
+  end
+
   def supervisors
     agents.boss.length
   end

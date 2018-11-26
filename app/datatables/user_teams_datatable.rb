@@ -1,7 +1,7 @@
 class UserTeamsDatatable < Effective::Datatable
 
   datatable do
-    order :id, :desc
+    order :title, :desc
     
     col :title
     col :location
